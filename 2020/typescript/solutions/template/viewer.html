@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Solution Viewer</title>
+    <style>
+      html,
+      body {
+        font-family: sans-serif;
+      }
+      pre {
+        border-radius: 0.5em;
+        padding: 0.5em;
+        background: #eee;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body>
+    <div id="viewer">
+      <h1>Solution Viewer ({{ solutionTitle }})</h1>
+      <p>
+        For interesting problems; this page can be used as a dynamic viewer.
+      </p>
+      <h3><a href="./input.txt">input.txt</a></h3>
+      <pre><code>{{ inputText }}</code></pre>
+      <h3><a href="./solution.ts">solution.ts</a></h3>
+      <pre><code>{{ solutionText }}</code></pre>
+    </div>
+    <script>
+      const app = new Vue({
+        el: "#viewer",
+        data: () => {
+          return {
+            solutionText: "[Loading]",
+            inputText: "[Loading]",
+          };
+        },
+        computed: {
+          solutionTitle() {
+            const parts = (document.location + "").split("/");
+            return parts.reverse()[1];
+          },
+        },
+        async mounted() {
+          this.solutionText = (await axios.get("./solution.ts")).data;
+          this.inputText = (await axios.get("./input.txt")).data;
+        },
+      });
+    </script>
+  </body>
+</html>

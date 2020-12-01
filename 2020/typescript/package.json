@@ -1,0 +1,25 @@
+{
+  "name": "typescript",
+  "logName": "Advent of Code typescript",
+  "version": "1.0.0",
+  "description": "Advent of Code typescript using Node TS for Current Year.",
+  "main": "run.ts",
+  "scripts": {
+    "start": "ts-node run.ts",
+    "webserver": "ts-node solutions/viewer-server.ts"
+  },
+  "author": "John Beech, Michael Gardner",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pre-push": "*",
+    "promise-path": "*",
+    "stats-lite": "*"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.9",
+    "@types/node": "^14.14.9",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.1.2"
+  }
+}

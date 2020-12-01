@@ -1,0 +1,5 @@
+node_modules
+package-lock.json
+**/jquery-2.1.1.min.js
+*.log
+dist
