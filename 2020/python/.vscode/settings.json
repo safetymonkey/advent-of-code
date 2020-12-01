@@ -1,0 +1,10 @@
+{
+  "files.trimTrailingWhitespace": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--ignore=E,W,C"],
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfArgs": [
+    "--style={based_on_style: google, indent_width: 2, blank_line_before_nested_class_or_def: False}"
+  ]
+}
