@@ -14,24 +14,11 @@ to TARGET_SUM
 # Constants
 DAY = '01'
 TARGET_SUM = 2020
+INPUT = f"inputs/day{DAY}.txt"
+TEST_INPUT = f"inputs/day{DAY}_test.txt"
 
 # Imports
-import functools
-import time
-
-
-# Helper/convenence methods
-def timer(func):
-  @functools.wraps(func)
-  def wrapper_timer(*args, **kwargs):
-    tic = time.perf_counter()
-    value = func(*args, **kwargs)
-    toc = time.perf_counter()
-    elapsed_time = toc - tic
-    print(f"Elapsed time: {elapsed_time:0.4f} seconds")
-    return value
-
-  return wrapper_timer
+from _helpers import timer
 
 
 def parse_input(filename):
@@ -48,7 +35,7 @@ def part1(input):
     if i_value > TARGET_SUM:
       continue
 
-    for j in range(i, len(input)):
+    for j in range(i + 1, len(input)):
       j_value = input[j]
       if i_value + j_value == TARGET_SUM:
         return (i_value * j_value)
@@ -61,7 +48,7 @@ def part2(input):
     if i_value > TARGET_SUM:
       continue
 
-    for j in range(i, len(input)):
+    for j in range(i + 1, len(input)):
       j_value = input[j]
       if i_value + j_value <= TARGET_SUM:
         for k in range(j, len(input)):
@@ -71,13 +58,8 @@ def part2(input):
 
 
 if __name__ == "__main__":
-  INPUT = f"inputs/day{DAY}.txt"
-  TEST_INPUT = f"inputs/day{DAY}_test.txt"
-
   assert part1(parse_input(TEST_INPUT)) == 514579
   print(f"Part 1: {part1(parse_input(INPUT))}")
-
   print('\n')
-
   assert part2(parse_input(TEST_INPUT)) == 241861950
   print(f"Part 2: {part2(parse_input(INPUT))}")
