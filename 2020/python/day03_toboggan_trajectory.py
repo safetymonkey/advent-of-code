@@ -17,11 +17,7 @@ from functools import reduce
 
 
 def parse_input(filename):
-  """ Convenience method to parse a file and return a list of dictionaries. """
-  #   with open(filename) as f:
-  #     input_list = f.readlines()
-  #     input_list = [line.strip('\n') for line in input_list]
-  #   return dict_list
+  """ Convenience method to parse input file """
   input = open(filename, "r").read().splitlines()
   input = [line * len(input) for line in input]
   return input
