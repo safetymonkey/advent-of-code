@@ -26,8 +26,8 @@ def parse_line(line):
   return command, next_int
 
 
-def traverse_instructions(input):
-  acc, i, visited = 0, 0, []
+def traverse_instructions(input, i=0, visited=[], swap=False):
+  acc, visited = 0, []
   while (i not in visited) and i < len(input):
     visited.append(i)
     command, next_int = parse_line(input[i])
@@ -37,19 +37,20 @@ def traverse_instructions(input):
     if command == 'acc':
       acc += next_int
     i += 1
-  return acc, (i not in visited)
+  return acc, visited, (i not in visited)
 
 
 @timer
 def part1(input):
-  acc, _ = traverse_instructions(input)
-  return acc
+  acc, visited, _ = traverse_instructions(input)
+  return acc, visited
 
 
 @timer
-def part2(input):
+def part2(input, visited):
   acc = 0
-  for i, line in enumerate(input):
+  # for i, line in enumerate(input):
+  for i in visited:
     command, next_int = parse_line(input[i])
     if command != 'acc':
       clone = input.copy()
@@ -57,15 +58,17 @@ def part2(input):
         clone[i] = clone[i].replace('nop', 'jmp')
       elif command == 'jmp':
         clone[i] = clone[i].replace('jmp', 'nop')
-      acc, complete = traverse_instructions(clone)
+      acc, _, complete = traverse_instructions(clone)
       if complete:
         break
   return acc
 
 
 if __name__ == "__main__":
-  assert part1(parse_input(TEST_INPUT)) == 5
-  print(f"Part 1: {part1(parse_input(INPUT))}")
+  acc, visited_test = part1(parse_input(TEST_INPUT))
+  assert acc == 5
+  acc, visited = part1(parse_input(INPUT))
+  print(f"Part 1: {acc}")
   print('\n')
-  assert part2(parse_input(TEST_INPUT)) == 8
-  print(f"Part 2: {part2(parse_input(INPUT))}")
+  assert part2(parse_input(TEST_INPUT), visited_test) == 8
+  print(f"Part 2: {part2(parse_input(INPUT), visited)}")
