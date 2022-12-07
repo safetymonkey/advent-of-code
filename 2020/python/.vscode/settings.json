@@ -7,5 +7,6 @@
   "python.formatting.yapfArgs": [
     "--style={based_on_style: google, indent_width: 2, blank_line_before_nested_class_or_def: False}"
   ],
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "python.pythonPath": "/Users/jgrover/Projects/advent-of-code/2020/python/Venv/bin/python3.9"
 }
